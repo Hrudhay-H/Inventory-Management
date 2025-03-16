@@ -5,7 +5,7 @@ USE inventory;
 CREATE TABLE Users (
     UserID INT PRIMARY KEY AUTO_INCREMENT,
     Name VARCHAR(100) NOT NULL,
-    Email VARCHAR(100) UNIQUE NOT NULL,
+    Email VARCHAR(100) UNIQUE CHECK (Email REGEXP '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$'),
     PasswordHash VARCHAR(255) NOT NULL, -- Added for authentication
     Role ENUM('Admin', 'Store Manager', 'Supplier') NOT NULL,
     CreatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -16,8 +16,8 @@ CREATE TABLE Suppliers (
     SupplierID INT PRIMARY KEY AUTO_INCREMENT,
     CompanyName VARCHAR(150) NOT NULL, -- Added for larger supplier networks
     ContactPerson VARCHAR(100),
-    Phone VARCHAR(20) UNIQUE CHECK (Phone REGEXP '^[0-9]{10,15}$'), -- Ensures valid phone format
-    Email VARCHAR(100) UNIQUE CHECK (Email LIKE '%_@__%.__%'), -- Ensures valid email format
+	Phone VARCHAR(20) UNIQUE CHECK (Phone REGEXP '^\+?[0-9]{10,15}$'),
+	Email VARCHAR(100) UNIQUE CHECK (Email REGEXP '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$'),
     Address TEXT
 );
 
@@ -34,7 +34,7 @@ CREATE TABLE Warehouses (
 -- Products Table
 CREATE TABLE Products (
     ProductID INT PRIMARY KEY AUTO_INCREMENT,
-    SKU VARCHAR(50) UNIQUE NOT NULL, -- Added for inventory tracking (SKU - Stock Keeping Unit)
+    SKU VARCHAR(50) UNIQUE NOT NULL, -- Added for inventory tracking
     Name VARCHAR(150) NOT NULL,
     Category VARCHAR(100),
     Description TEXT, -- Added to store additional details
@@ -69,8 +69,8 @@ CREATE TABLE Purchase_Orders (
 CREATE TABLE Customers (
     CustomerID INT PRIMARY KEY AUTO_INCREMENT,
     Name VARCHAR(100) NOT NULL,
-    Email VARCHAR(100) UNIQUE NOT NULL CHECK (Email LIKE '%_@__%.__%'),
-    Phone VARCHAR(20) UNIQUE CHECK (Phone REGEXP '^[0-9]{10,15}$'),
+    Phone VARCHAR(20) UNIQUE CHECK (Phone REGEXP '^\+?[0-9]{10,15}$'),
+    Email VARCHAR(100) UNIQUE CHECK (Email REGEXP '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$'),
     Address TEXT
 );
 
