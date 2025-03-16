@@ -34,7 +34,7 @@ CREATE TABLE Warehouses (
 -- Products Table
 CREATE TABLE Products (
     ProductID INT PRIMARY KEY AUTO_INCREMENT,
-    SKU VARCHAR(50) UNIQUE NOT NULL, -- Added for inventory tracking
+    SKU VARCHAR(50) UNIQUE NOT NULL, -- Added for inventory tracking (SKU - Stock Keeping Unit)
     Name VARCHAR(150) NOT NULL,
     Category VARCHAR(100),
     Description TEXT, -- Added to store additional details
