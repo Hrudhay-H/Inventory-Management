@@ -16,7 +16,7 @@ CREATE TABLE Suppliers (
     SupplierID INT PRIMARY KEY AUTO_INCREMENT,
     CompanyName VARCHAR(150) NOT NULL, -- Added for larger supplier networks
     ContactPerson VARCHAR(100),
-	Phone VARCHAR(20) UNIQUE CHECK (Phone REGEXP '^\+?[0-9]{10,15}$'),
+	Phone VARCHAR(20) UNIQUE,
 	Email VARCHAR(100) UNIQUE CHECK (Email REGEXP '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$'),
     Address TEXT
 );
@@ -69,7 +69,7 @@ CREATE TABLE Purchase_Orders (
 CREATE TABLE Customers (
     CustomerID INT PRIMARY KEY AUTO_INCREMENT,
     Name VARCHAR(100) NOT NULL,
-    Phone VARCHAR(20) UNIQUE CHECK (Phone REGEXP '^\+?[0-9]{10,15}$'),
+    Phone VARCHAR(20) UNIQUE,
     Email VARCHAR(100) UNIQUE CHECK (Email REGEXP '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$'),
     Address TEXT
 );
